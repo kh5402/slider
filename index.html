@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Image Slider with Links</title>
+</head>
+<body>
+  <a id="sliderLink" href="#" target="_blank">
+    <!-- 初めての画像をプレースホルダーに -->
+    <img id="sliderImage" src="https://t4.ftcdn.net/jpg/04/43/88/83/360_F_443888398_WYUJzNdTYTDhnC4YL2XkZr5XTGehYPOm.jpg" alt="Loading..." width="300">
+  </a>
+  <script>
+    const imagesAndLinks = [
+      {image: 'https://drive.google.com/uc?export=view&id=1z4rmVNV7ekzU_433SfAi7gIlEAhBDHf1', link: 'https://www.yahoo.co.jp/'},
+      {image: 'https://drive.google.com/uc?export=view&id=1mTXfq8AmxoYSC9UN1kcb27pwYe5dAoAQ', link: 'https://news.google.com/home?hl=ja&gl=JP&ceid=JP:ja'},
+      {image: 'https://drive.google.com/uc?export=view&id=13IVwewebBZnSkc4o386Csj3jm_Q9kA1M', link: 'https://twitter.com/notifications'}
+      // 以下同様
+    ];
+
+    let index = 0;
+
+    function changeImageAndLink() {
+      index = (index + 1) % imagesAndLinks.length;
+      const imgElement = document.getElementById('sliderImage');
+      const linkElement = document.getElementById('sliderLink');
+
+      imgElement.src = imagesAndLinks[index].image;
+      linkElement.href = imagesAndLinks[index].link;
+
+      // 画像の大きさを変更
+      imgElement.style.width = '720px';
+      imgElement.style.height = '480px';
+    }
+
+    // 最初の画像とリンクをセット
+    changeImageAndLink();
+
+    // 以降は10秒ごとに画像とリンクを変更
+    setInterval(changeImageAndLink, 3000);
+
+    // 新しいタブで開くようにする処理
+    document.getElementById('sliderLink').addEventListener('click', function(e) {
+      e.preventDefault();
+      window.open(imagesAndLinks[index].link, '_blank');
+    });
+    
+  </script>
+</body>
+</html>
